@@ -7,3 +7,14 @@
 //
 
 import Foundation
+
+
+class Paper {
+    var name : String
+    var exam : String
+    
+    init(exam: String, name: String) {
+        self.exam = exam
+        self.name = name
+    }
+}

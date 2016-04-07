@@ -8,19 +8,47 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
     
-    var items = ["a", "b", "c"]
-
+    var papers = [Paper]()
+    var filteredPapers = [Paper]()
+    let searchController = UISearchController(searchResultsController: nil)
+    
     @IBOutlet weak var papersTable: UITableView!
     
+    //MARK: Search
+    
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filteredPapers = papers.filter { paper in
+            let categoryMatch = (scope == "All") || (paper.exam == scope)
+            return  categoryMatch && paper.name.lowercaseString.containsString(searchText.lowercaseString)
+        }
+        
+        papersTable.reloadData()
+    }
+    
+    //MARK: TableView
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        if searchController.active && searchController.searchBar.text != "" {
+            return filteredPapers.count
+        }
+        return papers.count
+
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.papersTable.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell!
-        cell?.textLabel?.text = items[indexPath.row]
+        
+        let paper: Paper
+        
+        if searchController.active && searchController.searchBar.text != "" {
+            paper = filteredPapers[indexPath.row]
+        } else {
+            paper = papers[indexPath.row]
+        }
+        
+        cell.textLabel?.text = paper.name
         return cell
     }
     
@@ -28,10 +56,43 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
+    //MARK: Search Bar
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+        filterContentForSearchText(searchController.searchBar.text!, scope: scope)
+    }
+    
+    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        papersTable.reloadData()
+        filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        papers = [
+            Paper(exam: "PUT", name: "ncs 601"),
+            Paper(exam: "PUT", name: "ncs 602"),
+            Paper(exam: "PUT", name: "ncs 603"),
+            Paper(exam: "ST1", name: "ncs 604"),
+            Paper(exam: "ST2", name: "ncs 605"),
+            Paper(exam: "ST1", name: "ncs 601"),
+            Paper(exam: "ST2", name: "ncs 602"),
+            Paper(exam: "ST1", name: "ncs 603"),
+            Paper(exam: "ST2", name: "ncs 604")
+        ]
+        
         self.papersTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        
+        searchController.searchResultsUpdater = self
+        definesPresentationContext = true
+        papersTable.tableHeaderView = searchController.searchBar
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.scopeButtonTitles = ["All", "ST1", "ST2", "PUT"]
+        
     }
 
     override func didReceiveMemoryWarning() {
