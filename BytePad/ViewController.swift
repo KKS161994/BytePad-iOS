@@ -10,6 +10,7 @@ import UIKit
 
 import Alamofire
 import SwiftSpinner
+import SwiftyJSON
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
     
@@ -70,36 +71,32 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         filterContentForSearchText(searchController.searchBar.text!, scope: scope)
     }
     
-    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        papersTable.reloadData()
-        filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {        filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        papers = [
-            Paper(exam: "PUT", name: "ncs 601"),
-            Paper(exam: "PUT", name: "ncs 602"),
-            Paper(exam: "PUT", name: "ncs 603"),
-            Paper(exam: "ST1", name: "ncs 604"),
-            Paper(exam: "ST2", name: "ncs 605"),
-            Paper(exam: "ST1", name: "ncs 601"),
-            Paper(exam: "ST2", name: "ncs 602"),
-            Paper(exam: "ST1", name: "ncs 603"),
-            Paper(exam: "ST2", name: "ncs 604")
-        ]
+        // Do any additional setup after loading the view, typically from a nib
         
         Alamofire.request(.GET, "http://silive.in/bytepad/rest/api/paper/getallpapers?query=")
             .responseJSON { response in   // server data
                 self.activityIndicator.stopAnimating()
                 self.papersTable.hidden = false
-                print(response.result)   // result of response serialization
+//                print(response.result)   // result of response serialization
                 
-                if let JSON = response.result.value {
-                    print("JSON: \(JSON)")
+                let json = JSON(response.result.value!)
+                
+                for item in json{
+//                    print(item)
+                    let title = item.1["Title"].string!.characters.split(".").map(String.init)[0]
+                    let category = item.1["ExamCategory"].string
+                    let url = item.1["URL"].string
+                    
+                    let paper = Paper(name: title, exam: category!, url: url!)
+                    self.papers.append(paper)
                 }
+                self.papersTable.reloadData()
         }
         
         self.papersTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
@@ -108,7 +105,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         definesPresentationContext = true
         papersTable.tableHeaderView = searchController.searchBar
         searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.scopeButtonTitles = ["All", "ST1", "ST2", "PUT"]
+        searchController.searchBar.scopeButtonTitles = ["All", "ST1", "ST2", "PUT", "UT"]
+        searchController.searchBar.delegate = self
         
         
         // Activity Indicator
