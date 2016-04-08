@@ -8,6 +8,8 @@
 
 import UIKit
 
+import Alamofire
+
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
     
     var papers = [Paper]()
@@ -15,6 +17,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let searchController = UISearchController(searchResultsController: nil)
     
     @IBOutlet weak var papersTable: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     //MARK: Search
     
@@ -85,6 +88,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             Paper(exam: "ST2", name: "ncs 604")
         ]
         
+        Alamofire.request(.GET, "http://silive.in/bytepad/rest/api/paper/getallpapers?query=")
+            .responseJSON { response in   // server data
+                self.activityIndicator.stopAnimating()
+                self.papersTable.hidden = false
+//                print(response.result)   // result of response serialization
+                
+//                if let JSON = response.result.value {
+//                    print("JSON: \(JSON)")
+//                }
+        }
+        
         self.papersTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         
         searchController.searchResultsUpdater = self
@@ -93,6 +107,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.scopeButtonTitles = ["All", "ST1", "ST2", "PUT"]
         
+        
+        // Activity Indicator
+        
+        activityIndicator.startAnimating()
     }
 
     override func didReceiveMemoryWarning() {
