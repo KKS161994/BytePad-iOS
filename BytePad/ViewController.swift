@@ -9,6 +9,7 @@
 import UIKit
 
 import Alamofire
+import SwiftSpinner
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
     
@@ -18,6 +19,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var papersTable: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    
     
     //MARK: Search
     
@@ -92,11 +95,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             .responseJSON { response in   // server data
                 self.activityIndicator.stopAnimating()
                 self.papersTable.hidden = false
-//                print(response.result)   // result of response serialization
+                print(response.result)   // result of response serialization
                 
-//                if let JSON = response.result.value {
-//                    print("JSON: \(JSON)")
-//                }
+                if let JSON = response.result.value {
+                    print("JSON: \(JSON)")
+                }
         }
         
         self.papersTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
