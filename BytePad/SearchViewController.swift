@@ -98,25 +98,44 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         Alamofire.request(.GET, "http://silive.in/bytepad/rest/api/paper/getallpapers?query=")
             .responseJSON { response in   // server data
+                
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.hidden = true
-                self.loadingMessageLabel.hidden = true
-                self.table.hidden = false
-                //print(response.result)   // result of response serialization
                 
-                let json = JSON(response.result.value!)
-                
-                for item in json{
-                    print(item)
-                    let title = item.1["Title"].string!.characters.split(".").map(String.init)[0]
-                    let category = item.1["ExamCategory"].string
-                    let url = item.1["URL"].string
-                    let detail = item.1["PaperCategory"].string
+                // If the network works fine
+                if response.result.isFailure != true {
                     
-                    let paper = Paper(name: title, exam: category!, url: url!, detail: detail!)
-                    self.papers.append(paper)
+                    
+                    print("network okay")
+                    
+                    
+                    self.loadingMessageLabel.hidden = true
+                    self.table.hidden = false
+                    //print(response.result)   // result of response serialization
+                    
+                    let json = JSON(response.result.value!)
+                    
+                    for item in json{
+                        //                    print(item)
+                        let title = item.1["Title"].string!.characters.split(".").map(String.init)[0]
+                        let category = item.1["ExamCategory"].string
+                        let url = item.1["URL"].string
+                        let detail = item.1["PaperCategory"].string
+                        
+                        let paper = Paper(name: title, exam: category!, url: url!, detail: detail!)
+                        self.papers.append(paper)
+
+                    }
+                    self.table.reloadData()
+                    
                 }
-                self.table.reloadData()
+                // If the network fails
+                else {
+                    print("network fucked up")
+                    self.loadingMessageLabel.text = "Check your internet connectivity"
+                }
+                
+                
         }
         
         // Do any additional setup after loading the view, typically from a nib.
