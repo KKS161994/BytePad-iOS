@@ -87,10 +87,10 @@
             </objects>
             <point key="canvasLocation" x="1925" y="469"/>
         </scene>
-        <!--View Controller-->
+        <!--Download View Controller-->
         <scene sceneID="4IZ-md-c38">
             <objects>
-                <viewController id="owS-gS-dUI" sceneMemberID="viewController">
+                <viewController id="owS-gS-dUI" customClass="DownloadViewController" customModule="BytePad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NfN-qL-3ot"/>
                         <viewControllerLayoutGuide type="bottom" id="lEz-N1-qaw"/>
@@ -102,6 +102,10 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uYD-Gc-HKP">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="owS-gS-dUI" id="JTC-Ie-krk"/>
+                                    <outlet property="delegate" destination="owS-gS-dUI" id="HZD-Bn-2ly"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -114,6 +118,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="downloads" id="fHx-WR-sd0"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="downloadsTable" destination="uYD-Gc-HKP" id="8PE-DP-6EP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MBo-f7-sfY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
