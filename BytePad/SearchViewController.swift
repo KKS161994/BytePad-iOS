@@ -100,7 +100,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.hidden = true
                 self.table.hidden = false
-                                print(response.result)   // result of response serialization
+                //print(response.result)   // result of response serialization
                 
                 let json = JSON(response.result.value!)
                 
