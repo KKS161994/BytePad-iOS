@@ -12,16 +12,18 @@ import SwiftyJSON
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate{
     
+    //MARK: Variables
     var papers = [Paper]()
     var filteredPapers = [Paper]()
     let searchController = UISearchController(searchResultsController: nil)
     
-    
+    // MARK: Outlets
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var table: UITableView!
     @IBOutlet weak var loadingMessageLabel: UILabel!
     @IBOutlet weak var retryButton: UIButton!
     
+    //MARK: Actions
     @IBAction func retryButton(sender: UIButton) {
         self.loadingMessageLabel.hidden = false
         self.loadingMessageLabel.text = "While the satellite moves into position..."
@@ -32,7 +34,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
+    // MARK: Table View
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // If in searching mode, then return the number of results else return the total number
         if searchController.active && searchController.searchBar.text != "" {
             return filteredPapers.count
         }
@@ -78,9 +83,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         downloadMenu.addAction(saveAction)
         downloadMenu.addAction(cancelAction)
         
-        // 5
         self.presentViewController(downloadMenu, animated: true, completion: nil)
     }
+    
+    // MARK: Search
     
     func filterContentForSearchText(searchText: String, scope: String = "All") {
         filteredPapers = papers.filter { paper in
@@ -92,7 +98,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        //        filterContentForSearchText(searchController.searchBar.text!)
         let searchBar = searchController.searchBar
         let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
         filterContentForSearchText(searchController.searchBar.text!, scope: scope)
@@ -100,17 +105,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        //        filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
         filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
+    
+    // MARK: Defaults
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.getPapersData()
         
-        // Do any additional setup after loading the view, typically from a nib.
-//        self.table.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
@@ -119,14 +123,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         searchController.searchBar.delegate = self
         activityIndicator.startAnimating()
         
-//        searchController.searchBar.barTintColor = UIColor.redColor()
-//        searchController.searchBar.tintColor = UIColor.whiteColor()
         
     }
     
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: API call
+    
     func getPapersData(){
         Alamofire.request(.GET, "http://silive.in/bytepad/rest/api/paper/getallpapers?query=")
-            .responseJSON { response in   // server data
+            .responseJSON { response in
                 
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.hidden = true
@@ -134,18 +144,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 // If the network works fine
                 if response.result.isFailure != true {
                     
-                    
-                    print("network okay")
-                    
-                    
                     self.loadingMessageLabel.hidden = true
                     self.table.hidden = false
                     //print(response.result)   // result of response serialization
                     
                     let json = JSON(response.result.value!)
                     
-                    for item in json{
-                        //                    print(item)
+                    for item in json {
+                        // Split the title on the . to remove the extention
                         let title = item.1["Title"].string!.characters.split(".").map(String.init)[0]
                         let category = item.1["ExamCategory"].string
                         let url = item.1["URL"].string
@@ -161,18 +167,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     // If the network fails
                 else {
                     self.retryButton.hidden = false
-                    
-                    print("network fucked up")
                     self.loadingMessageLabel.text = "Check your internet connectivity"
                 }
                 
-                
         }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     
