@@ -28,7 +28,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.table.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell!
         
         let paper: Paper
         
@@ -38,9 +37,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             paper = papers[indexPath.row]
         }
         
-        cell.textLabel?.text = paper.name
-        //                cell.textLabel?.text = String(indexPath.row)
-        return cell
+        if let cell = self.table.dequeueReusableCellWithIdentifier("Cell") as? PapersTableCell {
+            cell.initCell(paper.name, examType: paper.exam)
+            print(cell)
+            return cell
+        }
+        print("didnt work")
+        
+        return PapersTableCell()
         
     }
     
@@ -113,7 +117,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         // Do any additional setup after loading the view, typically from a nib.
-        self.table.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+//        self.table.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true

@@ -54,9 +54,50 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZdW-Qw-7ry">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="73" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZdW-Qw-7ry">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="73" id="MA2-Cr-K4i" customClass="PapersTableCell" customModule="BytePad" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="92" width="600" height="73"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MA2-Cr-K4i" id="jUV-SO-hXI">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="72.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="paper type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bg7-zb-JHb">
+                                                    <rect key="frame" x="8" y="50" width="83" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="Z1D-Rs-Jm0"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paper Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3u3-iQ-BME">
+                                                    <rect key="frame" x="8" y="8" width="584" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="GAg-YZ-cGV"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Bg7-zb-JHb" firstAttribute="top" secondItem="3u3-iQ-BME" secondAttribute="bottom" constant="21" id="7gb-Hf-qdF"/>
+                                                <constraint firstItem="Bg7-zb-JHb" firstAttribute="leading" secondItem="jUV-SO-hXI" secondAttribute="leadingMargin" id="BY6-Lh-ruh"/>
+                                                <constraint firstItem="3u3-iQ-BME" firstAttribute="trailing" secondItem="jUV-SO-hXI" secondAttribute="trailingMargin" id="RQP-eI-P30"/>
+                                                <constraint firstItem="3u3-iQ-BME" firstAttribute="top" secondItem="jUV-SO-hXI" secondAttribute="topMargin" id="haa-JR-NiZ"/>
+                                                <constraint firstItem="3u3-iQ-BME" firstAttribute="leading" secondItem="jUV-SO-hXI" secondAttribute="leadingMargin" id="vL0-ew-Mq9"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="examTypeLabel" destination="Bg7-zb-JHb" id="S3h-Lp-g9R"/>
+                                            <outlet property="paperNameLabel" destination="3u3-iQ-BME" id="79v-cx-SGT"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="VU1-VQ-PuX" id="aNu-4J-JpN"/>
                                     <outlet property="delegate" destination="VU1-VQ-PuX" id="OCs-3Z-Ied"/>
