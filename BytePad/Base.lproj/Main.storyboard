@@ -111,24 +111,36 @@
                                     <outlet property="delegate" destination="VU1-VQ-PuX" id="OCs-3Z-Ied"/>
                                 </connections>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="LsX-kk-aRl">
-                                <rect key="frame" x="290" y="290" width="20" height="20"/>
-                            </activityIndicatorView>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Tnk-PJ-nLC">
+                                <rect key="frame" x="67" y="190" width="303" height="41"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="LsX-kk-aRl">
+                                        <rect key="frame" x="141" y="0.0" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="While the satellite moves into position..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vII-Q9-9No">
+                                        <rect key="frame" x="0.0" y="20" width="303" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="LsX-kk-aRl" firstAttribute="centerY" secondItem="qtF-iv-lzS" secondAttribute="centerY" id="3kG-BN-Xzp"/>
                             <constraint firstItem="7Cd-XW-GdK" firstAttribute="top" secondItem="ZdW-Qw-7ry" secondAttribute="bottom" id="8yN-hn-Lgi"/>
                             <constraint firstItem="ZdW-Qw-7ry" firstAttribute="leading" secondItem="qtF-iv-lzS" secondAttribute="leadingMargin" constant="-20" id="ALR-K9-wNO"/>
                             <constraint firstItem="ZdW-Qw-7ry" firstAttribute="top" secondItem="ImQ-3f-Uls" secondAttribute="bottom" id="KO1-dS-y9y"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ZdW-Qw-7ry" secondAttribute="trailing" constant="-20" id="Prf-eq-qoN"/>
-                            <constraint firstItem="LsX-kk-aRl" firstAttribute="centerX" secondItem="qtF-iv-lzS" secondAttribute="centerX" id="iLh-hf-Sde"/>
+                            <constraint firstItem="Tnk-PJ-nLC" firstAttribute="centerX" secondItem="qtF-iv-lzS" secondAttribute="centerX" id="sFF-nZ-Kuo"/>
+                            <constraint firstItem="Tnk-PJ-nLC" firstAttribute="centerY" secondItem="qtF-iv-lzS" secondAttribute="centerY" id="wrS-6J-h2r"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="search" id="HII-Q8-j5G"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="activityIndicator" destination="LsX-kk-aRl" id="2qj-5o-6Rc"/>
+                        <outlet property="loadingMessageLabel" destination="vII-Q9-9No" id="Mlr-ax-HOh"/>
                         <outlet property="table" destination="ZdW-Qw-7ry" id="vfK-tx-bqo"/>
                     </connections>
                 </viewController>

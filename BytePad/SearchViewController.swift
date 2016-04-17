@@ -19,6 +19,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var table: UITableView!
+    @IBOutlet weak var loadingMessageLabel: UILabel!
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchController.active && searchController.searchBar.text != "" {
@@ -99,6 +100,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             .responseJSON { response in   // server data
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.hidden = true
+                self.loadingMessageLabel.hidden = true
                 self.table.hidden = false
                 //print(response.result)   // result of response serialization
                 
