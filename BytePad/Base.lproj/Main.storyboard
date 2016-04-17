@@ -74,7 +74,7 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paper Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3u3-iQ-BME">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paper Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="3u3-iQ-BME">
                                                     <rect key="frame" x="8" y="8" width="584" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="GAg-YZ-cGV"/>
@@ -93,7 +93,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="examTypeLabel" destination="Bg7-zb-JHb" id="S3h-Lp-g9R"/>
+                                            <outlet property="detailLabel" destination="Bg7-zb-JHb" id="Ghl-fe-748"/>
                                             <outlet property="paperNameLabel" destination="3u3-iQ-BME" id="79v-cx-SGT"/>
                                         </connections>
                                     </tableViewCell>

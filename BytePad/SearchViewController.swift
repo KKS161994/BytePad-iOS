@@ -38,11 +38,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         if let cell = self.table.dequeueReusableCellWithIdentifier("Cell") as? PapersTableCell {
-            cell.initCell(paper.name, examType: paper.exam)
+            
+            cell.initCell(paper.name, detail: paper.detail)
             print(cell)
             return cell
         }
-        print("didnt work")
         
         return PapersTableCell()
         
@@ -105,12 +105,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 let json = JSON(response.result.value!)
                 
                 for item in json{
-                    //                    print(item)
+                    print(item)
                     let title = item.1["Title"].string!.characters.split(".").map(String.init)[0]
                     let category = item.1["ExamCategory"].string
                     let url = item.1["URL"].string
+                    let detail = item.1["PaperCategory"].string
                     
-                    let paper = Paper(name: title, exam: category!, url: url!)
+                    let paper = Paper(name: title, exam: category!, url: url!, detail: detail!)
                     self.papers.append(paper)
                 }
                 self.table.reloadData()

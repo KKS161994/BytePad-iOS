@@ -11,11 +11,11 @@ import UIKit
 class PapersTableCell: UITableViewCell {
 
     @IBOutlet weak var paperNameLabel: UILabel!
-    @IBOutlet weak var examTypeLabel: UILabel!
+    @IBOutlet weak var detailLabel: UILabel!
     
-    func initCell(paperName: String, examType: String)  {
+    func initCell(paperName: String, detail: String)  {
         self.paperNameLabel.text = paperName
-        self.examTypeLabel.text = examType
+        self.detailLabel.text = detail
     }
     
     

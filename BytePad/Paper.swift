@@ -13,11 +13,12 @@ class Paper {
     private var _name : String
     private var _exam : String
     private var _url: String
-    
-    init(name: String, exam: String, url:String) {
+    private var _detail: String
+    init(name: String, exam: String, url:String, detail: String) {
         self._exam = exam
         self._name = name
         self._url = url
+        self._detail = detail
     }
     
     var name: String {
@@ -30,6 +31,10 @@ class Paper {
     
     var url: String {
         return self._url
+    }
+    
+    var detail: String {
+        return self._detail
     }
     
     
