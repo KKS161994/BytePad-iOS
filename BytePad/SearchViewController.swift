@@ -20,6 +20,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var table: UITableView!
     @IBOutlet weak var loadingMessageLabel: UILabel!
+    @IBOutlet weak var retryButton: UIButton!
+    
+    @IBAction func retryButton(sender: UIButton) {
+    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchController.active && searchController.searchBar.text != "" {
@@ -131,6 +135,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 }
                 // If the network fails
                 else {
+                    self.retryButton.hidden = false
+                    
                     print("network fucked up")
                     self.loadingMessageLabel.text = "Check your internet connectivity"
                 }

@@ -123,6 +123,13 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="07Z-M5-sj4">
+                                        <rect key="frame" x="116" y="41" width="71" height="0.0"/>
+                                        <state key="normal" title="Retry Now"/>
+                                        <connections>
+                                            <action selector="retryButton:" destination="VU1-VQ-PuX" eventType="touchUpInside" id="Ecv-YE-zrK"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -141,6 +148,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="LsX-kk-aRl" id="2qj-5o-6Rc"/>
                         <outlet property="loadingMessageLabel" destination="vII-Q9-9No" id="Mlr-ax-HOh"/>
+                        <outlet property="retryButton" destination="07Z-M5-sj4" id="WZA-Au-wSJ"/>
                         <outlet property="table" destination="ZdW-Qw-7ry" id="vfK-tx-bqo"/>
                     </connections>
                 </viewController>
