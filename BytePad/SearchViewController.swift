@@ -45,7 +45,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let downloadMenu = UIAlertController(title: nil, message: "Confirm Download", preferredStyle: .ActionSheet)
         
+        
+        let saveAction = UIAlertAction(title: "Download", style: .Default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            print("File Saved")
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+            print("Cancelled")
+        })
+        
+        
+        downloadMenu.addAction(saveAction)
+        downloadMenu.addAction(cancelAction)
+        
+        // 5
+        self.presentViewController(downloadMenu, animated: true, completion: nil)
     }
     
     func filterContentForSearchText(searchText: String, scope: String = "All") {
