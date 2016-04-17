@@ -23,6 +23,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var retryButton: UIButton!
     
     @IBAction func retryButton(sender: UIButton) {
+        self.loadingMessageLabel.hidden = false
+        self.loadingMessageLabel.text = "While the satellite moves into position..."
+        self.activityIndicator.hidden = false
+        self.activityIndicator.startAnimating()
+        self.retryButton.hidden = true
+        self.getPapersData()
+        
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -100,6 +107,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.getPapersData()
+        
+        // Do any additional setup after loading the view, typically from a nib.
+//        self.table.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        table.tableHeaderView = searchController.searchBar
+        searchController.searchBar.scopeButtonTitles = ["All", "ST1", "ST2", "PUT", "UT"]
+        searchController.searchBar.delegate = self
+        activityIndicator.startAnimating()
+        
+//        searchController.searchBar.barTintColor = UIColor.redColor()
+//        searchController.searchBar.tintColor = UIColor.whiteColor()
+        
+    }
+    
+    func getPapersData(){
         Alamofire.request(.GET, "http://silive.in/bytepad/rest/api/paper/getallpapers?query=")
             .responseJSON { response in   // server data
                 
@@ -128,12 +153,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         
                         let paper = Paper(name: title, exam: category!, url: url!, detail: detail!)
                         self.papers.append(paper)
-
+                        
                     }
                     self.table.reloadData()
                     
                 }
-                // If the network fails
+                    // If the network fails
                 else {
                     self.retryButton.hidden = false
                     
@@ -143,20 +168,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
                 
         }
-        
-        // Do any additional setup after loading the view, typically from a nib.
-//        self.table.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        searchController.searchResultsUpdater = self
-        searchController.dimsBackgroundDuringPresentation = false
-        definesPresentationContext = true
-        table.tableHeaderView = searchController.searchBar
-        searchController.searchBar.scopeButtonTitles = ["All", "ST1", "ST2", "PUT", "UT"]
-        searchController.searchBar.delegate = self
-        activityIndicator.startAnimating()
-        
-//        searchController.searchBar.barTintColor = UIColor.redColor()
-//        searchController.searchBar.tintColor = UIColor.whiteColor()
-        
     }
     
     override func didReceiveMemoryWarning() {
