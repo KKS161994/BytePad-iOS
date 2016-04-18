@@ -10,7 +10,7 @@ import UIKit
 
 class DownloadViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var items = ["a","b","c"]
+    var items = [String]()
 
     @IBOutlet weak var downloadsTable: UITableView!
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -35,12 +35,36 @@ class DownloadViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     
+    override func viewDidAppear(animated: Bool) {
+        
+        items.removeAll()
+        
+        let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
+        
+        // now lets get the directory contents (including folders)
+        do {
+            let directoryContents = try NSFileManager.defaultManager().contentsOfDirectoryAtURL(documentsUrl, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions())
+//            print(directoryContents)
+            
+            for var file in directoryContents {
+                self.items.append(file.lastPathComponent!)
+            }
+            
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+        
+        downloadsTable.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         downloadsTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Download Cell")
 
         // Do any additional setup after loading the view.
+        
+       
     }
 
     override func didReceiveMemoryWarning() {

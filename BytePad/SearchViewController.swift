@@ -71,6 +71,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let saveAction = UIAlertAction(title: "Download", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
+            
+            var url = String(self.papers[indexPath.row].url)
+            url = url.stringByReplacingOccurrencesOfString(" ", withString: "%20")
+            print(url)
+            let destination = Alamofire.Request.suggestedDownloadDestination(directory: .DocumentDirectory, domain: .UserDomainMask)
+            Alamofire.download(.GET, url, destination: destination)
+            
             print("File Saved")
         })
         
@@ -173,6 +180,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    
+
 }
 
