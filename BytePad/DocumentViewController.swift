@@ -10,14 +10,16 @@ import UIKit
 
 class DocumentViewController: UIViewController {
 
-    @IBOutlet weak var url: UILabel!
     
+    @IBOutlet weak var webView: UIWebView!
     var some : String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.url.text = some
         // Do any additional setup after loading the view.
+        let url = NSURL (string: some)
+        let requestObj = NSURLRequest(URL: url!)
+        webView.loadRequest(requestObj)
     }
 
 

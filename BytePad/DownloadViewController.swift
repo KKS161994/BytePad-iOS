@@ -22,7 +22,7 @@ class DownloadViewController: UIViewController, UITableViewDataSource, UITableVi
         
         print(items[indexPath.row].url)
         
-        performSegueWithIdentifier("DocumentViewSegue", sender: items[indexPath.row].name)
+        performSegueWithIdentifier("DocumentViewSegue", sender: items[indexPath.row].url)
         
     }
     
