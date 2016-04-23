@@ -22,9 +22,23 @@ class DownloadViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Download Cell") as UITableViewCell!
-        cell.textLabel?.text = items[indexPath.row]
-        return cell
+//        let cell = tableView.dequeueReusableCellWithIdentifier("Download Cell") as UITableViewCell!
+//        cell.textLabel?.text = items[indexPath.row]
+//        return cell
+        
+        
+        
+        if let cell = self.downloadsTable.dequeueReusableCellWithIdentifier("Download Cell") as? DownloadsTableCell {
+            
+            print("HEY")
+            
+            cell.initCell(items[indexPath.row], detail: "", fileURL: "")
+            print(cell)
+            return cell
+        }
+        
+        return DownloadsTableCell()
+        
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -60,7 +74,6 @@ class DownloadViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        downloadsTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Download Cell")
 
         // Do any additional setup after loading the view.
         
