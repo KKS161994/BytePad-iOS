@@ -217,45 +217,11 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="downloadsTable" destination="uYD-Gc-HKP" id="8PE-DP-6EP"/>
-                        <segue destination="YDD-2F-3kW" kind="show" identifier="DocumentViewSegue" id="kQG-Z6-jG4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MBo-f7-sfY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1938" y="1251"/>
-        </scene>
-        <!--Document View Controller-->
-        <scene sceneID="Emu-h2-d8V">
-            <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="YDD-2F-3kW" customClass="DocumentViewController" customModule="BytePad" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="tJn-WS-VfU"/>
-                        <viewControllerLayoutGuide type="bottom" id="fVp-rE-1Hp"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8s9-t1-Dia">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OkD-Z4-WNM">
-                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="OkD-Z4-WNM" firstAttribute="top" secondItem="tJn-WS-VfU" secondAttribute="bottom" id="37g-Sz-Pkb"/>
-                            <constraint firstItem="fVp-rE-1Hp" firstAttribute="top" secondItem="OkD-Z4-WNM" secondAttribute="bottom" id="48h-rm-jYs"/>
-                            <constraint firstItem="OkD-Z4-WNM" firstAttribute="leading" secondItem="8s9-t1-Dia" secondAttribute="leadingMargin" constant="-20" id="iQx-Ru-FOo"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="OkD-Z4-WNM" secondAttribute="trailing" constant="-20" id="wcg-s9-WmG"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="webView" destination="OkD-Z4-WNM" id="icB-b8-btQ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="itR-ty-3Uy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2610" y="1251"/>
         </scene>
     </scenes>
 </document>

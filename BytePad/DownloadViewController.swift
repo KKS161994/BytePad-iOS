@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import QuickLook
 
-class DownloadViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class DownloadViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, QLPreviewControllerDataSource {
     
     var items = [(name:String, url:String)]()
 
@@ -22,7 +23,12 @@ class DownloadViewController: UIViewController, UITableViewDataSource, UITableVi
         
         print(items[indexPath.row].url)
         
-        performSegueWithIdentifier("DocumentViewSegue", sender: items[indexPath.row].url)
+//        performSegueWithIdentifier("DocumentViewSegue", sender: items[indexPath.row].url)
+        
+        let previewQL = QLPreviewController() // 4
+        previewQL.dataSource = self // 5
+        previewQL.currentPreviewItemIndex = indexPath.row // 6
+        showViewController(previewQL, sender: nil) // 7
         
     }
     
@@ -85,6 +91,16 @@ class DownloadViewController: UIViewController, UITableViewDataSource, UITableVi
         downloadsTable.reloadData()
     }
     
+    // MARK: Preview
+    
+    func numberOfPreviewItemsInPreviewController(controller: QLPreviewController) -> Int {
+        return items.count
+    }
+    
+    func previewController(controller: QLPreviewController, previewItemAtIndex index: Int) -> QLPreviewItem {
+        return NSURL(string: items[index].url)!
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -110,14 +126,5 @@ class DownloadViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     */
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "DocumentViewSegue" {
-            if let webViewVC = segue.destinationViewController as? DocumentViewController {
-                if let url = sender as? String {
-                    webViewVC.some = url
-                }
-            }
-        }
-    }
 
 }
