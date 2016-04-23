@@ -11,6 +11,7 @@
 		4B42C1031CC3A47200D3E557 /* DownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B42C1021CC3A47200D3E557 /* DownloadViewController.swift */; };
 		4B42C1051CC3AE0700D3E557 /* PapersTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B42C1041CC3AE0700D3E557 /* PapersTableCell.swift */; };
 		4B42C1281CCB698C00D3E557 /* DownloadsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B42C1271CCB698C00D3E557 /* DownloadsTableCell.swift */; };
+		4B42C12A1CCBD12E00D3E557 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B42C1291CCBD12E00D3E557 /* DocumentViewController.swift */; };
 		4B63ABD61CB6B69B00373906 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B63ABD51CB6B69B00373906 /* AppDelegate.swift */; };
 		4B63ABDB1CB6B69B00373906 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B63ABD91CB6B69B00373906 /* Main.storyboard */; };
 		4B63ABDD1CB6B69B00373906 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B63ABDC1CB6B69B00373906 /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 		4B42C1021CC3A47200D3E557 /* DownloadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadViewController.swift; sourceTree = "<group>"; };
 		4B42C1041CC3AE0700D3E557 /* PapersTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PapersTableCell.swift; sourceTree = "<group>"; };
 		4B42C1271CCB698C00D3E557 /* DownloadsTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadsTableCell.swift; sourceTree = "<group>"; };
+		4B42C1291CCBD12E00D3E557 /* DocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentViewController.swift; sourceTree = "<group>"; };
 		4B63ABD21CB6B69B00373906 /* BytePad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BytePad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B63ABD51CB6B69B00373906 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4B63ABDA1CB6B69B00373906 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				4B42C1271CCB698C00D3E557 /* DownloadsTableCell.swift */,
 				4BB94C2C1CC393A8006A16CA /* SearchViewController.swift */,
 				4B42C1021CC3A47200D3E557 /* DownloadViewController.swift */,
+				4B42C1291CCBD12E00D3E557 /* DocumentViewController.swift */,
 				4B63ABD91CB6B69B00373906 /* Main.storyboard */,
 				4B63ABDC1CB6B69B00373906 /* Assets.xcassets */,
 				4B63ABDE1CB6B69B00373906 /* LaunchScreen.storyboard */,
@@ -234,6 +237,7 @@
 				4BB94C2D1CC393A8006A16CA /* SearchViewController.swift in Sources */,
 				4B42C1281CCB698C00D3E557 /* DownloadsTableCell.swift in Sources */,
 				4B42C1031CC3A47200D3E557 /* DownloadViewController.swift in Sources */,
+				4B42C12A1CCBD12E00D3E557 /* DocumentViewController.swift in Sources */,
 				4B63ABE91CB6BFF200373906 /* Paper.swift in Sources */,
 				4B42C1051CC3AE0700D3E557 /* PapersTableCell.swift in Sources */,
 			);

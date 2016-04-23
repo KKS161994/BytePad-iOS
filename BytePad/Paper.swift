@@ -14,6 +14,7 @@ class Paper {
     private var _exam : String
     private var _url: String
     private var _detail: String
+    
     init(name: String, exam: String, url:String, detail: String) {
         self._exam = exam
         self._name = name

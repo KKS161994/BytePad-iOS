@@ -12,7 +12,6 @@ class DownloadsTableCell: UITableViewCell {
     
     @IBOutlet weak var paperNameLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
-    
     var fileURL: String!
     
     func initCell(paperName: String, detail: String, fileURL: String)  {

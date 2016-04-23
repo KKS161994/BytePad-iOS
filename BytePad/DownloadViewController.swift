@@ -10,30 +10,28 @@ import UIKit
 
 class DownloadViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var items = [String]()
+    var items = [(name:String, url:String)]()
 
     @IBOutlet weak var downloadsTable: UITableView!
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        print(items[indexPath.row].url)
+        
+        performSegueWithIdentifier("DocumentViewSegue", sender: items[indexPath.row].name)
+        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCellWithIdentifier("Download Cell") as UITableViewCell!
-//        cell.textLabel?.text = items[indexPath.row]
-//        return cell
-        
-        
         
         if let cell = self.downloadsTable.dequeueReusableCellWithIdentifier("Download Cell") as? DownloadsTableCell {
             
-            print("HEY")
-            
-            cell.initCell(items[indexPath.row], detail: "", fileURL: "")
-            print(cell)
+            cell.initCell(items[indexPath.row].name, detail: "", fileURL: items[indexPath.row].url)
+
             return cell
         }
         
@@ -43,6 +41,18 @@ class DownloadViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
+            
+//            let fileManager = NSFileManager.defaultManager()
+//            
+//            // Delete 'hello.swift' file
+//            
+//            do {
+//                try fileManager.removeItemAtPath(String(items[indexPath.row].url))
+//            }
+//            catch let error as NSError {
+//                print("Ooops! Something went wrong: \(error)")
+//            }
+            
             items.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
         }
@@ -61,7 +71,11 @@ class DownloadViewController: UIViewController, UITableViewDataSource, UITableVi
 //            print(directoryContents)
             
             for var file in directoryContents {
-                self.items.append(file.lastPathComponent!)
+                print(file.lastPathComponent)
+                print(file.absoluteURL)
+                
+                // Save the data in the list as a tuple
+                self.items.append((file.lastPathComponent!, file.absoluteString))
             }
             
         } catch let error as NSError {
@@ -95,5 +109,15 @@ class DownloadViewController: UIViewController, UITableViewDataSource, UITableVi
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "DocumentViewSegue" {
+            if let webViewVC = segue.destinationViewController as? DocumentViewController {
+                if let url = sender as? String {
+                    webViewVC.some = url
+                }
+            }
+        }
+    }
 
 }

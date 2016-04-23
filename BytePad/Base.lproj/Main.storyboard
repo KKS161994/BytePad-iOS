@@ -196,7 +196,6 @@
                                         <connections>
                                             <outlet property="detailLabel" destination="G9n-Yi-mfv" id="rWY-pd-g10"/>
                                             <outlet property="paperNameLabel" destination="eiQ-oA-Lqt" id="daa-cC-s4z"/>
-                                            <segue destination="YDD-2F-3kW" kind="show" id="zjg-NR-syH"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -218,16 +217,17 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="downloadsTable" destination="uYD-Gc-HKP" id="8PE-DP-6EP"/>
+                        <segue destination="YDD-2F-3kW" kind="show" identifier="DocumentViewSegue" id="kQG-Z6-jG4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MBo-f7-sfY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1938" y="1251"/>
         </scene>
-        <!--View Controller-->
+        <!--Document View Controller-->
         <scene sceneID="Emu-h2-d8V">
             <objects>
-                <viewController id="YDD-2F-3kW" sceneMemberID="viewController">
+                <viewController id="YDD-2F-3kW" customClass="DocumentViewController" customModule="BytePad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tJn-WS-VfU"/>
                         <viewControllerLayoutGuide type="bottom" id="fVp-rE-1Hp"/>
@@ -235,8 +235,19 @@
                     <view key="view" contentMode="scaleToFill" id="8s9-t1-Dia">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0gI-V7-9VS">
+                                <rect key="frame" x="29" y="289" width="542" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="url" destination="0gI-V7-9VS" id="rVA-hn-Elm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="itR-ty-3Uy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
