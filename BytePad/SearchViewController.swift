@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  Bytepad-test
+//  Bytepad
 //
 //  Created by Utkarsh Bansal on 17/04/16.
 //  Copyright © 2016 Software Incubator. All rights reserved.
@@ -66,31 +66,53 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let downloadMenu = UIAlertController(title: nil, message: "Confirm Download", preferredStyle: .ActionSheet)
+    }
+    
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let viewButton = UITableViewRowAction(style: .Normal, title: "View") { action, index in
+            print("more button tapped")
+        }
+        viewButton.backgroundColor = UIColor(red:0.20, green:0.67, blue:0.86, alpha:1.0)
         
+
         
-        let saveAction = UIAlertAction(title: "Download", style: .Default, handler: {
-            (alert: UIAlertAction!) -> Void in
+        let downloadButton = UITableViewRowAction(style: .Normal, title: "Download") { action, index in
             
             var url = String(self.papers[indexPath.row].url)
             url = url.stringByReplacingOccurrencesOfString(" ", withString: "%20")
             print(url)
             let destination = Alamofire.Request.suggestedDownloadDestination(directory: .DocumentDirectory, domain: .UserDomainMask)
-            Alamofire.download(.GET, url, destination: destination)
             
-            print("File Saved")
-        })
+            // Spinner in cell
+            
+            //            var selectCell = self.table.cellForRowAtIndexPath(indexPath) as? PapersTableCell
+            //            selectCell!.downloadSpinner.hidden = false
+            
+            Alamofire.download(.GET, url, destination: destination).response { _, _, _, error in
+                if let error = error {
+                    print("Failed with error: \(error)")
+                } else {
+                    print("Downloaded file successfully")
+                }
+                //                selectCell?.downloadSpinner.hidden = true
+            }
+
+        }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
-            (alert: UIAlertAction!) -> Void in
-            print("Cancelled")
-        })
+        downloadButton.backgroundColor = UIColor(red:0.30, green:0.85, blue:0.39, alpha:1.0)
         
         
-        downloadMenu.addAction(saveAction)
-        downloadMenu.addAction(cancelAction)
-        
-        self.presentViewController(downloadMenu, animated: true, completion: nil)
+        return [downloadButton, viewButton]
+
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        // the cells you would like the actions to appear needs to be editable
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        // you need to implement this method too or you can't swipe to display the actions
     }
     
     // MARK: Search
