@@ -83,6 +83,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             //            var selectCell = self.table.cellForRowAtIndexPath(indexPath) as? PapersTableCell
             //            selectCell!.downloadSpinner.hidden = false
             
+            // Dismiss the download button
+            self.table.editing = false
+            
             Alamofire.download(.GET, url, destination: destination).response { _, _, _, error in
                 if let error = error {
                     print("Failed with error: \(error)")
