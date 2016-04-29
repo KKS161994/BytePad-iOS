@@ -69,12 +69,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let viewButton = UITableViewRowAction(style: .Normal, title: "View") { action, index in
-            print("more button tapped")
-        }
-        viewButton.backgroundColor = UIColor(red:0.20, green:0.67, blue:0.86, alpha:1.0)
         
-
         
         let downloadButton = UITableViewRowAction(style: .Normal, title: "Download") { action, index in
             
@@ -102,7 +97,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         downloadButton.backgroundColor = UIColor(red:0.30, green:0.85, blue:0.39, alpha:1.0)
         
         
-        return [downloadButton, viewButton]
+        return [downloadButton]
 
     }
     
